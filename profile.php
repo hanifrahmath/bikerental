@@ -9,21 +9,25 @@ header('location:index.php');
 else{
 if(isset($_POST['updateprofile']))
   {
+$noid=$_POST['noid'];
 $name=$_POST['fullname'];
 $mobileno=$_POST['mobilenumber'];
 $dob=$_POST['dob'];
 $adress=$_POST['address'];
 $city=$_POST['city'];
 $country=$_POST['country'];
+$scanid=$_POST['scanid'];
 $email=$_SESSION['login'];
-$sql="update tblusers set FullName=:name,ContactNo=:mobileno,dob=:dob,Address=:adress,City=:city,Country=:country where EmailId=:email";
+$sql="update tblusers set NoID=:noid,FullName=:name,ContactNo=:mobileno,dob=:dob,Address=:adress,City=:city,Country=:country,ScanID=:scanid where EmailId=:email";
 $query = $dbh->prepare($sql);
+$query->bindParam(':noid',$noid,PDO::PARAM_STR);
 $query->bindParam(':name',$name,PDO::PARAM_STR);
 $query->bindParam(':mobileno',$mobileno,PDO::PARAM_STR);
 $query->bindParam(':dob',$dob,PDO::PARAM_STR);
 $query->bindParam(':adress',$adress,PDO::PARAM_STR);
 $query->bindParam(':city',$city,PDO::PARAM_STR);
 $query->bindParam(':country',$country,PDO::PARAM_STR);
+$query->bindParam(':scanid',$scanid,PDO::PARAM_STR);
 $query->bindParam(':email',$email,PDO::PARAM_STR);
 $query->execute();
 $msg="Profile Updated Successfully";
@@ -159,6 +163,10 @@ foreach($results as $result)
             </div>
             <?php } ?>
             <div class="form-group">
+              <label class="control-label">Nomor ID (NIM/NIK)</label>
+              <input class="form-control white_bg" value="<?php echo htmlentities($result->NoID);?>" name="noid" id="noid" type="text" required>
+            </div>
+            <div class="form-group">
               <label class="control-label">Nama Lengkap</label>
               <input class="form-control white_bg" name="fullname" value="<?php echo htmlentities($result->FullName);?>" id="fullname" type="text"  required>
             </div>
@@ -175,16 +183,20 @@ foreach($results as $result)
               <input class="form-control white_bg" value="<?php echo htmlentities($result->dob);?>" name="dob" placeholder="dd/mm/yyyy" id="birth-date" type="text" >
             </div>
             <div class="form-group">
-              <label class="control-label">Alamat</label>
-              <textarea class="form-control white_bg" name="address" rows="4" ><?php echo htmlentities($result->Address);?></textarea>
+              <label class="control-label">Alamat Domisili</label>
+              <textarea class="form-control white_bg" name="address" rows="4" required="required"><?php echo htmlentities($result->Address);?> </textarea>
             </div>
             <div class="form-group">
               <label class="control-label">Negara</label>
               <input class="form-control white_bg"  id="country" name="country" value="<?php echo htmlentities($result->City);?>" type="text">
             </div>
             <div class="form-group">
-              <label class="control-label">Kota</label>
+              <label class="control-label">Kabupaten/Kota</label>
               <input class="form-control white_bg" id="city" name="city" value="<?php echo htmlentities($result->City);?>" type="text">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Upload Scan ID</label>
+              <input class="form-control white_bg" value="<?php echo htmlentities($result->ScanID);?>" name="scanid" id="scanid" type="file" required>
             </div>
             <?php }} ?>
 
