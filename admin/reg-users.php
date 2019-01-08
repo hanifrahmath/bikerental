@@ -95,28 +95,32 @@ $msg="Page data updated  successfully";
 									<thead>
 										<tr>
 										<th>#</th>
-												<th> Nama</th>
-											<th>Email </th>
-											<th>No Hp</th>
+										<th>ID</th>
+										<th>Nama</th>
+										<th>Email </th>
+										<th>No Hp</th>
 										<th>Tanggal Lahir</th>
 										<th>Alamat</th>
 										<th>Kota</th>
 										<th>Negara</th>
 										<th>Tanggal Registrasi</th>
+										<th>ScanID</th>
 
 										</tr>
 									</thead>
 									<tfoot>
 										<tr>
 										<th>#</th>
-											<th> Nama</th>
-											<th>Email </th>
-											<th>No Hp</th>
+										<th>ID</th>
+										<th>Nama</th>
+										<th>Email </th>
+										<th>No Hp</th>
 										<th>Tanggal Lahir</th>
 										<th>Alamat</th>
 										<th>Kota</th>
 										<th>Negara</th>
 										<th>Tanggal Registrasi</th>
+										<th>ScanID</th>
 										</tr>
 										</tr>
 									</tfoot>
@@ -133,14 +137,16 @@ foreach($results as $result)
 {				?>
 										<tr>
 											<td><?php echo htmlentities($cnt);?></td>
+											<td><?php echo htmlentities($result->NoID);?></td>
 											<td><?php echo htmlentities($result->FullName);?></td>
 											<td><?php echo htmlentities($result->EmailId);?></td>
 											<td><?php echo htmlentities($result->ContactNo);?></td>
-	<td><?php echo htmlentities($result->dob);?></td>
+											<td><?php echo htmlentities($result->dob);?></td>
 											<td><?php echo htmlentities($result->Address);?></td>
 											<td><?php echo htmlentities($result->City);?></td>
 											<td><?php echo htmlentities($result->Country);?></td>
 											<td><?php echo htmlentities($result->RegDate);?></td>
+											<td><?php echo htmlentities($result->ScanID);?></td>
 										</tr>
 										<?php $cnt=$cnt+1; }} ?>
 
